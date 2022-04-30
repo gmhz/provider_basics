@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 
 class ListProvider extends ChangeNotifier {
-
   bool _loading = false;
-
 
   bool get loading => _loading;
 
@@ -15,7 +13,10 @@ class ListProvider extends ChangeNotifier {
   List<String> items = [];
 
   Future<void> loadItems() async {
+    if (items.isNotEmpty) return;
+
     loading = true;
+
     await Future.delayed(Duration(seconds: 3));
     items.addAll([
       "Капуста0",
@@ -30,5 +31,10 @@ class ListProvider extends ChangeNotifier {
 
     loading = false;
     notifyListeners();
+  }
+
+  void reset() {
+    _loading = false;
+    items.clear();
   }
 }

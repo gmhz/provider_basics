@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import 'list_screen.dart';
+import 'providers/list_provider.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -23,7 +25,10 @@ class _HomeScreenState extends State<HomeScreen> {
             onTap: () {
               Navigator.of(context).push(
                 MaterialPageRoute(
-                  builder: (_) => const ListScreen(),
+                  builder: (_) => ChangeNotifierProvider(
+                    create: (context) => ListProvider(),
+                    builder: (context, _) => const ListScreen(),
+                  ),
                 ),
               );
             },
